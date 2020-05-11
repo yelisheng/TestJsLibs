@@ -1,0 +1,103 @@
+谈一个编程范式-----函数式编程
+先看一段代码
+
+//过滤传入数组并返回data数组
+function getData(col) {
+    var results = [];
+    for (var i=0; i < col.length; i++) {
+        if (col[i] && col[i].data) {
+            results.push(col[i].data);
+        }
+    }
+    return results;
+}
+函数逻辑：传入数组，取出里面每个元素的data域，然后插入新的数组返回
+
+//过滤传入数组并返回data数组（函数式）
+function getData(col) {
+    return col.filter(item => item && item.data).map(item => item.data);
+}
+
+
+看看上面命令式与函数编程区别：
+1、命令式中，循环使用i这个局部变量，而i怎么开始，怎么结束，怎么增长，i是正向循环，还是反向循环，这和要对集合进行筛选无关.
+2、命令式中，引入了results临时变量
+3、命令式中，如果需求变成返回data的长度，那要读完这个10行代码，才能确定怎么修改。
+4、命令式中，不容易重构复用。
+
+
+function extract(filterFn, mapFn, col) {
+    return col.filter(filterFn).map(mapFn);
+}
+
+const validData = item => item && item.data;
+
+const getData = extract.bind(this, validData, item => item.data);
+//对col执行getData
+getData(col);
+
+
+const getDataLength = extract.bind(this, validData, item => item.data.length)
+//对col执行getDataLength
+getDataLength(col);
+
+
+我们大致已经能看出函数式编程的一些特点：
+
+1、提倡组合（composition）
+2、每个函数尽可能完成单一的功能
+3、屏蔽细节，告诉计算机我要做什么，而不是怎么做。filter、map，它们并未暴露自身的细节。 filter 函数的实现，我们可以暂时忽略它的实现细节，只需了解它的功能即可。
+4、尽可能不引入或者少引入状态。
+
+这些特点运用得当的话，能够为软件带来什么：
+1、更好的设计和实现
+2、更加清晰可读的代码。由于状态被大大减少，代码更容易维护，也带来更强的稳定性。
+3、在分布式系统下有更好的性能。函数式编程一般都在一个较高的层次进行抽象，map / filter / reduce 就是其基础指令，如果这些指令为分布式而优化，那么系统无需做任何改动，就可以提高性能。
+4、使得惰性运算成为可能。在命令式编程中，由于你明确告诉了 CPU 一步步该怎么操作，能优化的空间被挤压；而在函数式编程里，每个函数只是封装了运算，一组数据从输入经历一系列运算到输出，如果没有人处理这些输出，则运算不会被真正执行.
+
+
+
+高阶函数
+   定义：一个函数可以接收另一个函数作为参数，这种函数就称之为高阶函数。
+
+c#中高阶函数的例子
+
+//民用住宅面积
+public Func<int,int,decimal> SquareForCivil()
+{
+    return (width,length)=>width*length;
+}
+
+//商业住宅面积
+public Func<int, int, decimal> SquareForBusiness()
+{
+    return (width, length) => width * length*1.2m;
+}
+
+//物业费
+public decimal PropertyFee(decimal price,int width,int length, Func<int, int, decimal> square)
+{
+    return price*square(width, length);
+}
+
+//计算60平的商住房屋物业费
+PropertyFee(1.2, 4, 15, SquareForBusiness());
+
+
+
+
+函数柯里化
+    定义：是把接受多个参数的函数变换成接受一个单一参数(最初函数的第一个参数)的函数，并且返回接受余下的参数且返回结果的新函数。
+
+进行函数式编程的时候，函数参数的位置很有讲究，需要精心安排，把辅助性的，可以柯里化的参数放在前面，以方便绑定。
+
+
+
+
+总结
+函数式编程还衍生出很多概念，本质都是为了组合（composition），在函数式编程里，组合是王道。
+
+结束
+
+
+

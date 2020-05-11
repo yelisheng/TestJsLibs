@@ -1,0 +1,65 @@
+<!doctype html><html><head><meta charset=UTF-8><title>谈一个编程范式-函数式编程 - By 叶利生</title><link rel=stylesheet href=//cdn.staticfile.org/font-awesome/4.7.0/css/font-awesome.min.css><link rel=stylesheet href=//cdn.staticfile.org/prism/1.15.0/themes/prism.min.css><link rel=stylesheet href=//cdn.staticfile.org/KaTeX/0.10.0-rc.1/katex.min.css><link rel=stylesheet href=//cdn.staticfile.org/KaTeX/0.5.1/katex.min.css><link href=./css/chunk-vendors.4e4765ff.css rel=stylesheet></head><body><div><article id=webslides><section slide class="slide bg-black-blue aligncenter" image="https://cn.bing.com/az/hprichbg/rb/RainierDawn_EN-AU3730494945_1920x1080.jpg .dark"><span class="background dark" style="background-image:url('https://cn.bing.com/az/hprichbg/rb/RainierDawn_EN-AU3730494945_1920x1080.jpg')"></span><div class=wrap wrap=true><h1 class="text-landing text-shadow">谈一个编程范式</h1></div></section><section slide class="slide bg-black-blue aligncenter" image="https://cn.bing.com/az/hprichbg/rb/RainierDawn_EN-AU3730494945_1920x1080.jpg .dark"><span class="background dark" style="background-image:url('https://cn.bing.com/az/hprichbg/rb/RainierDawn_EN-AU3730494945_1920x1080.jpg')"></span><div class=wrap wrap=true><h1 class="text-landing text-shadow">函数式编程</h1></div></section><section slide class="slide aligncenter"><div class=wrap wrap=true><ul><li>先看一段代码</li></ul></div></section><section slide class=slide :class=size-150><div class="wrap size-150" wrap=true><pre class=language-textile><code class=language-textile><span class="token phrase">//过滤传入数组并返回data数组
+function getData(col) {
+    var results = [];
+    for (var i=0; i &lt; col.length; i++) {
+        if (col[i] &amp;&amp; col[i].data) {
+            results.push(col[i].data);
+        }
+    }
+    return results;
+}</span>
+
+</code></pre><pre class=language-textile><code class=language-textile><span class="token phrase">function getData(col) {
+    return col.filter(item => item &amp;&amp; item.data).map(item => item.data);
+}
+</span></code></pre><hr><ul><li>看看命令式与函数编程区别</li></ul></div></section><section slide class=slide :class=size-80><div class="wrap size-80" wrap=true><ul><li>看看新需求来了，怎么重构</li></ul><hr></div></section><section slide class=slide :class=size-80><div class="wrap size-80" wrap=true><pre class=language-textile><code class=language-textile><span class="token phrase">function extract(filterFn, mapFn, col) {
+    return col.filter(filterFn).map(mapFn);
+}</span>
+
+<span class="token phrase">const validData = item => item &amp;&amp; item.data;</span>
+
+<span class="token phrase">const getData = extract.bind(this, validData, item => item.data);
+//对col执行getData
+getData(col);</span>
+
+<span class="token phrase">const getDataLength = extract.bind(this, validData, item => item.data.length)
+//对col执行getDataLength
+getDataLength(col);</span>
+
+</code></pre></div></section><section slide class=slide :class=size-80><div class="wrap size-80" wrap=true><ul><li class="text-landing text-shadow">我们大致已经能看出函数式编程的一些特点</li></ul></div></section><section slide class=slide :class=size-150><div class="wrap size-150" wrap=true><ol class="text-cols build"><li class=bounce><strong>提倡组合（composition）</strong></li><li class=bounce><strong>每个函数尽可能完成单一的功能</strong></li><li class=bounce><strong>屏蔽细节，告诉计算机我要做什么，而不是怎么做。</strong></li><li class=bounce><strong>尽可能不引入或者少引入状态</strong></li></ol></div></section><section slide class=slide :class=size-80><div class="wrap size-80" wrap=true><ul><li class="text-landing text-shadow">这些特点运用得当的话能够为软件带来什么</li></ul></div></section><section slide class=slide :class=size-80><div class="wrap size-80" wrap=true><ol class="text-cols build"><li class=bounce><strong>更好的设计和实现</strong></li><li class=bounce><strong>更加清晰可读的代码。由于状态被大大减少，代码更容易维护，也带来更强的稳定性</strong></li><li class=bounce><strong>在分布式系统下有更好的性能。函数式编程一般都在一个较高的层次进行抽象，map / filter / reduce 就是其基础指令，如果这些指令为分布式而优化，那么系统无需做任何改动，就可以提高性能</strong></li><li class=bounce><strong>使得惰性运算成为可能。在命令式编程中，由于你明确告诉了 CPU 一步步该怎么操作，能优化的空间被挤压；而在函数式编程里，每个函数只是封装了运算，一组数据从输入经历一系列运算到输出，如果没有人处理这些输出，则运算不会被真正执行</strong></li></ol></div></section><section slide class="slide bg-black-blue aligncenter" image="https://cn.bing.com/az/hprichbg/rb/RainierDawn_EN-AU3730494945_1920x1080.jpg .dark"><span class="background dark" style="background-image:url('https://cn.bing.com/az/hprichbg/rb/RainierDawn_EN-AU3730494945_1920x1080.jpg')"></span><div class=wrap wrap=true><h1>高阶函数</h1><hr><ul><li>一个函数可以接收另一个函数作为参数，这种函数就称之为高阶函数</li></ul></div></section><section slide class=slide :class=size-80><div class="wrap size-80" wrap=true><pre class=language-textile><code class=language-textile>
+<span class="token phrase">//民用住宅面积
+public Func&lt;int,int,decimal> SquareForCivil()
+{
+    return (width,length)=>width*length;
+}
+//商业住宅面积
+public Func&lt;int, int, decimal> SquareForBusiness()
+{
+    return (width, length) => width <span class="token inline"><span class="token punctuation">*</span><span class="token bold"> length</span><span class="token punctuation">*</span></span>1.2m;
+}
+//物业费
+public decimal PropertyFee(decimal price,int width,int length, Func&lt;int, int, decimal> square)
+{
+    return price*square(width, length);
+}</span>
+
+<span class="token phrase">//计算60平的商住房屋物业费
+PropertyFee(1.2, 4, 15, SquareForBusiness());
+</span></code></pre></div></section><section slide class="slide bg-black-blue aligncenter" image="https://cn.bing.com/az/hprichbg/rb/RainierDawn_EN-AU3730494945_1920x1080.jpg .dark"><span class="background dark" style="background-image:url('https://cn.bing.com/az/hprichbg/rb/RainierDawn_EN-AU3730494945_1920x1080.jpg')"></span><div class=wrap wrap=true><h1>函数柯里化</h1><hr><ul><li>是把接受多个参数的函数变换成接受一个单一参数(最初函数的第一个参数)的函数，并且返回接受余下的参数且返回结果的新函数</li><li>进行函数式编程的时候，函数参数的位置很有讲究，需要精心安排，把辅助性的，可以柯里化的参数放在前面，以方便绑定</li></ul></div></section><section slide class="slide bg-black-blue aligncenter" image="https://cn.bing.com/az/hprichbg/rb/RainierDawn_EN-AU3730494945_1920x1080.jpg .dark"><span class="background dark" style="background-image:url('https://cn.bing.com/az/hprichbg/rb/RainierDawn_EN-AU3730494945_1920x1080.jpg')"></span><div class=wrap wrap=true><h1>总结</h1><hr><ul><li>函数式编程还衍生出很多概念，本质都是为了组合（composition），在函数式编程里，组合是王道。</li></ul></div></section><section slide class="slide bg-black-blue aligncenter" image="https://cn.bing.com/az/hprichbg/rb/RainierDawn_EN-AU3730494945_1920x1080.jpg .dark"><span class="background dark" style="background-image:url('https://cn.bing.com/az/hprichbg/rb/RainierDawn_EN-AU3730494945_1920x1080.jpg')"></span><div class=wrap wrap=true><h2>Thank you</h2></div></section></article></div><script src=//cdn.staticfile.org/echarts/4.1.0-release/echarts.min.js></script><script src=//cdn.staticfile.org/mermaid/8.0.0/mermaid.min.js></script><script>mermaid.startOnLoad = false;</script><script src=https://www.echartsjs.com/asset/theme/infographic.js></script><script>window.pluginsOptions = {"echarts":{"theme":"infographic"},"mermaid":{"theme":"forest"}}
+
+
+
+document.addEventListener('DOMContentLoaded', () => {
+    let isPrintMode = false;
+    if(~location.search.indexOf('print-pdf')){
+        isPrintMode = true;
+        WebSlides.registerPlugin('scroll', function(){});
+    }
+    const ws = new WebSlides({
+        loop: false
+    })
+    window.wsInstance = ws;
+    if(isPrintMode){
+        ws.slides.forEach(s=>s.show())
+    }
+}, false)</script><script src=./js/chunk-vendors.js></script><script src=./js/FunctionalProgramming.js></script></body></html>
