@@ -20,6 +20,7 @@
     "express": "^4.17.1",
     "lazy.js": "^0.5.1",
     "nodeppt": "^2.2.0",
-    "npm-watch": "^0.6.0"
+    "npm-watch": "^0.6.0",
+    "redis": "^3.0.2"
   }
 }
