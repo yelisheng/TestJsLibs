@@ -18,6 +18,7 @@
     "colors": "^1.4.0",
     "commander": "^5.1.0",
     "express": "^4.17.1",
+    "lazy.js": "^0.5.1",
     "nodeppt": "^2.2.0",
     "npm-watch": "^0.6.0"
   }
