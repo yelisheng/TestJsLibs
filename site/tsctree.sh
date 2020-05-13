@@ -1,1 +1,0 @@
-find . -name '*.ts' -not -name '*.d.ts' -not -path "*/node_modules/*"| xargs tsc --module "commonjs" --sourcemap

@@ -1,7 +1,7 @@
 {
   "name": "extract",
   "version": "1.0.0",
-  "description": "JS library",
+  "description": "Test JS library",
   "main": "index.js",
   "directories": {
     "doc": "docs"
@@ -12,7 +12,18 @@
     "postbuild": "cp -rf dist ./static",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "yels",
+  "keywords": [
+    "test js library",
+    "nodeppt",
+    "ppt",
+    "rides",
+    "prettier"
+  ],
+  "author": "yelisheng",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/yelisheng/extract.git"
+  },
   "license": "ISC",
   "dependencies": {
     "colors": "^1.4.0",
