@@ -3,6 +3,8 @@
 
 站点集成常用JS工具库 [进入](http://142m3f6461.picp.vip)
 
+![avatar](/help.jpg)
+
  * 浏览器控制台进行js库的调试
 	- JQuery $
 	- Lodash _
