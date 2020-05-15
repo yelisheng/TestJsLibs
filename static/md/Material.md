@@ -15,6 +15,18 @@
 #### 全系列集合
  + [开发全系列](https://github.com/EbookFoundation/free-programming-books/blob/master/free-programming-books-zh.md)
 
+
+#### emmet常用
+ + !
+ + 标签名
+ + 标签名#id.class.class
+ + 标签名{标签内值}
+ + 标签名+标签名+标签名
+ + 标签名>子标签名*重复数量
+ + 标签名>子标签名>子子标签名^子标签名>子子标签名
+ + 标签名[属性名=属性值]
+ 
+
 #### vscode快捷键
  + 移动光标
     + Cmd + ←	Fn + ← 将光标定位到当前行的最左侧 
