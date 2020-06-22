@@ -15,6 +15,17 @@
 #### 全系列集合
  + [开发全系列](https://github.com/EbookFoundation/free-programming-books/blob/master/free-programming-books-zh.md)
 
+#### whistle
+    + [whistle使用](http://wproxy.org/whistle/install.html)
+
+#### 优秀业务项目
+    + [jeecg-boot](https://github.com/zhangdaiscott/jeecg-boot)
+
+#### mac工具安装
+    + [homebrew](https://zhuanlan.zhihu.com/p/111014448)
+    + [ab安装](https://www.jianshu.com/p/a7ee2ffb5c0f)
+    + [ab介绍](https://www.cnblogs.com/yueminghai/p/6412254.html)  
+    + [ab测试问题](https://blog.51cto.com/hdjxx/1875935?source=dra)  
 
 #### emmet常用
  + !
@@ -344,3 +355,54 @@
  + assign
  + concat
  + !important
+
+#### node安装常见问题
+ + node 全局安装插件没有权限
+   + sudo chown -R $(whoami) $(npm config get prefix)/{lib/node_modules,bin,share}
+
+####  react
+ + 01 | React出现的历史背景及特性介绍
+ + 02 | 以组件方式考虑UI的构建
+ + 03 | JSX的本质 : 不是模板引擎，而是语法糖
+ + 04 | React组件的生命周期及其使用场景
+ + 05 | 理解Virtual DOM及key属性的作用
+ + 06 | 组件设计模式 : 高阶组件和函数作为子组件
+ + 07 | 理解新的Context API及其使用场景
+ + 08 | 使用脚手架工具创建React项目
+ + 09 | 打包和部署
+ + 10 | Redux（1） : 前端为何需要状态管理库
+ + 11 | Redux（2） : 深入理解Store、Action、Reducer
+ + 12 | Redux（3） : 在React中使用Redux
+ + 13 | Redux（4） : 理解异步Action、Redux中间件
+ + 14 | Redux（5） : 如何组织Action和Reducer
+ + 15 | Redux（6） : 理解不可变数据（Immutability）
+ + 16 | React Router（1）：路由不只是页面切换，更是代码组织方式
+ + 17 | React Router（2）：参数定义，嵌套路由的使用场景
+ + 18 | UI组件库对比和介绍：Ant.Design、Material UI、Semantic UI
+ + 19 | 使用Next.js创建React同构应用
+ + 20 | 使用Jest、Enzyme等工具进行单元测试
+ + 21 | 常用开发调试工具：ESLint、Prettier、React DevTool、Redux DevTool
+ + 22 | 前端项目的理想架构：可维护、可扩展、可测试、易开发、易建构
+ + 23 | 拆分复杂度（1）：按领域模型（feature）组织代码，降低耦合度
+ + 24 | 拆分复杂度（2）：如何组织component、action和reducer
+ + 25 | 拆分复杂度（3）：如何组织React Router的路由配置
+ + 26 | 使用Rekit（1）：创建项目，代码生成和重构
+ + 27 | 使用Rekit（2）：遵循最佳实践，保持代码一致性
+ + 28 | 使用React Router管理登录和授权
+ + 29 | 实现表单（1）：初始数据，提交和跳转
+ + 30 | 实现表单（2）：错误处理，动态表单元素，内容动态加载
+ + 31 | 列表页（1）：搜索，数据缓存和分页
+ + 32 | 列表页（2）：缓存更新，加载状态，错误处理
+ + 33 | 页面数据需要来源多个请求的处理
+ + 34 | 内容页的加载与缓存
+ + 35 | 基于React Router实现分步操作
+ + 36 | 常见页面布局的实现
+ + 37 | 使用React Portals实现对话框，使用antd对话框
+ + 38 | 集成第三方JS库：以d3.js为例
+ + 39 | 基于路由实现菜单导航
+ + 40 | React中拖放的实现
+ + 41 | 性能永远是第一需求：时刻考虑性能问题
+ + 42 | 网络性能优化：自动化按需加载
+ + 43 | 使用Reselect避免重复计算
+ + 44 | 下一代React：异步渲染
+ + 45 | 使用Chrome DevTool进行性能调优&结课测试
